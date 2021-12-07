@@ -23,6 +23,14 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
+    public function channels(){
+        return $this->belongsToMany(Channel::class, 'channel_user');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

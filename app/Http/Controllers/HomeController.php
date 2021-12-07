@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $messages = Message::all();
+        $channels = auth()->user()->channels;
+        return view('index', [
+            'messages' => $messages,
+            ''
+        ]);
     }
 }

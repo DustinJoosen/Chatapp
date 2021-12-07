@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MessagesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+
+Route::prefix('/api/messages')->group(function(){
+    Route::get('/channel/{channel}', [MessagesController::class, 'get']);
+    Route::post('/', [MessagesController::class, 'store']);
+    Route::delete('/{message}', [MessagesController::class, 'remove']);
+});

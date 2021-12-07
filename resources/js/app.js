@@ -29,4 +29,11 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    created(){
+        Echo.channel('notification')
+            .listen('MessagePosted', (e) => {
+                //trigger the refresh of the page
+                $("#channel_button_" + e.channel).trigger("click");
+            });
+    }
 });

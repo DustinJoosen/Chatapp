@@ -1,0 +1,38 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.set_channel_button{
+    cursor: pointer;
+}
+
+#messages_screen{
+    background-color: lightblue;
+}
+
+
+.message{
+    padding:3px;
+}
+
+.message p{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.message.m_right{
+    text-align: right;
+}
+
+.message_name_time{
+    font-size:12px;
+    margin-bottom: -5px;
+}
+
+.message_text{
+    font-size: 17px;
+}

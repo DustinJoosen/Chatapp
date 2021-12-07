@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\ChannelsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,8 @@ Route::prefix('/api/messages')->group(function(){
     Route::get('/channel/{channel}', [MessagesController::class, 'get']);
     Route::post('/', [MessagesController::class, 'store']);
     Route::delete('/{message}', [MessagesController::class, 'remove']);
+});
+
+Route::prefix('/channels')->group(function(){
+    Route::get('/', [ChannelsController::class, 'index']);
 });

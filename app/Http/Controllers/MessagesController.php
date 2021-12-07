@@ -13,7 +13,12 @@ class MessagesController extends Controller
     }
 
     public function get(Channel $channel){
-        return response($channel->messages, 200);
+        //include the user and channel inside the channel
+        $channel = $channel::with(['messages.channel', 'messages.user'])->get()->find($channel->id);
+        $messages = $channel->messages
+            ->sortBy('created_at', 'DESC');
+
+        return response($messages, 200);
     }
 
     public function store(Request $request){
@@ -29,7 +34,8 @@ class MessagesController extends Controller
                 "text" => $text
             ]);
 
-            return response('successfully created message', 200);
+            $channel = Channel::findOrFail($channel_id);
+            return response($channel->messages, 200);
         }
         else{
             return response('you need to be authorized to post a message', 401);

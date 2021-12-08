@@ -28,7 +28,7 @@ class HomeController extends Controller
         $channels = auth()->user()->channels;
         return view('index', [
             'messages' => $messages,
-            ''
+            'channels' => $channels
         ]);
     }
 }

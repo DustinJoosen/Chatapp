@@ -38,13 +38,13 @@ class MessagesController extends Controller
                 "text" => $text
             ]);
 
-            //retrieve the channel, for the messages
-            $channel = Channel::findOrFail($channel_id);
+            //include the user, so that it gets send along with the broadcast
+            $message = $message::with(['user'])->get()->find($message->id);
 
             //invoke the message posted event, broadcasting the update
-            event(new MessagePosted($channel->id));
+            event(new MessagePosted($channel_id, $message));
 
-            return response($channel->messages, 200);
+            return response($message, 200);
         }
         else{
             return response('you need to be authorized to post a message', 401);

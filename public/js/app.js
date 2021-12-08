@@ -5302,8 +5302,8 @@ var app = new Vue({
   el: '#app',
   created: function created() {
     Echo.channel('notification').listen('MessagePosted', function (e) {
-      //trigger the refresh of the page
-      $("#channel_button_" + e.channel).trigger("click");
+      //add the message to the list
+      add_message(e.message);
     });
   }
 });

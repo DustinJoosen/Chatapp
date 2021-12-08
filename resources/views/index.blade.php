@@ -17,7 +17,11 @@
         @csrf
 
         <input type="text" name="text" placeholder="message" required/>
-        <input type="int" value="1" name="channel_id" required placeholder="channel"/>
+        <select name="channel_id">
+            @foreach($channels as $channel)
+                <option value="{{ $channel->id }}">{{ $channel->name }}</option>
+            @endforeach
+        </select>
         <input type="submit"/>
     </form>
 </div>

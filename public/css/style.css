@@ -10,11 +10,32 @@ body{
     cursor: pointer;
 }
 
-#messages_screen{
+#chat_screen{
     background-color: lightblue;
 }
 
+#messages_screen_creating{
+    display: none;
+}
 
+#messages_screen_creating input{
+    float: left;
+}
+#messages_screen_creating input[type=text]{
+    display: inline-block;
+    width: 60%;
+    border-radius: 25px 0 0 25px;
+}
+
+#messages_screen_creating input[type=submit]{
+    display: inline-block;
+    width: 5%;
+    border-radius: 0 25px 25px 0;
+}
+
+
+
+/*message object styling*/
 .message{
     padding:3px;
 }

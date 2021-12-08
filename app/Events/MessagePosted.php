@@ -15,16 +15,19 @@ class MessagePosted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $message;
     public $channel;
 
     /**
      * Create a new event instance.
      *
-     * @param \App\Models\Channel $channel
+     * @param $channel
+     * @param Message $message
      */
-    public function __construct($channel)
+    public function __construct($channel, Message $message)
     {
         $this->channel = $channel;
+        $this->message = $message;
     }
 
     /**

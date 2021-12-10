@@ -16,6 +16,10 @@ $(document).ready(function(){
 
     //when you click on one of the channel buttons, set the messages
     $('.set_channel_button').on("click", function(){
+        //set this own class to be selected
+        $(".set_channel_button").removeClass("selected");
+        $(this).addClass("selected");
+
         //this would mean a channel is selected. So display the input
         //todo: make this different
         $("#messages_screen_creating").css("display", "block");
@@ -34,8 +38,11 @@ $(document).ready(function(){
                 console.log('http request successfull');
                 console.log(data);
 
-                //as all messages are recieved, set them to MESSAGES
-                MESSAGES = data;
+                //as all messages are received, set them to MESSAGES
+                MESSAGES = data.messages;
+
+                //show all the values (name, description etc.) of the channel
+                display_channel_values(data);
 
                 //write all the messages to the dom
                 display_messages();
@@ -64,8 +71,14 @@ $(document).ready(function(){
             }
         })
 
+        $("#text").val("");
     });
 });
+
+function display_channel_values(channel){
+    $("#channel_name").html(channel.name);
+    $("#channel_desc").html(channel.description);
+}
 
 //when a new message is recieved from the broadcast, add it to the list and display it.
 //this is done via this message so that you don't have to completely reload all messages for every message.
@@ -75,7 +88,7 @@ function add_message(message){
 
     //ask for the html markup for the message, and add it to the dom
     var html = get_html(message);
-    $("#messages_screen").append(html);
+    $("#messages_screen").prepend(html);
 }
 
 //basically adds everyting in the MESSAGES variable to the chatpage
@@ -83,7 +96,7 @@ function display_messages(){
     for(var i = 0; i < MESSAGES.length; i++){
         //ask for the html markup for the message, and add it to the dom
         var html = get_html(MESSAGES[i]);
-        $("#messages_screen").append(html);
+        $("#messages_screen").prepend(html);
     }
 }
 

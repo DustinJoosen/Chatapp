@@ -3,19 +3,55 @@
 }
 
 body{
-    overflow-x: hidden;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#channels_list,
+#chat_side_panel{
+    background-color: rgb(0, 122, 255);
+    color: #fff;
+    font-size:19px;
+    height: 90vh;
+}
+
+.selected {
+    background-color: rgb(50, 151, 255);
+}
+
+.set_channel_button:hover{
+    background-color: rgb(50, 151, 255);
+}
+
+#channels_list .set_channel_button{
+}
+
+.channel_list_image{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    margin-right:10px;
 }
 
 .set_channel_button{
     cursor: pointer;
+    width:105%;
+    padding-left:20px;
+    padding-top:15px;
+    padding-bottom: 1px;
 }
 
 #chat_screen{
-    background-color: lightblue;
+    height: 90vh;
+
+}
+
+#messages_screen{
+    overflow-y: auto;
 }
 
 #messages_screen_creating{
-    display: none;
+
 }
 
 #messages_screen_creating input{
@@ -23,13 +59,13 @@ body{
 }
 #messages_screen_creating input[type=text]{
     display: inline-block;
-    width: 60%;
+    width:90%;
     border-radius: 25px 0 0 25px;
 }
 
 #messages_screen_creating input[type=submit]{
     display: inline-block;
-    width: 5%;
+    width: 10%;
     border-radius: 0 25px 25px 0;
 }
 

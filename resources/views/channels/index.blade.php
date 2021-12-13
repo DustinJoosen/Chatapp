@@ -18,7 +18,7 @@
                 <h4 style="text-align: center" id="channel_name"></h4>
                 <h6 style="text-align: center" id="channel_desc"></h6>
                 <div style="text-align:center">
-                    <i id="people_list_icon" class="fa fa-users" style="font-size:24px; cursor:pointer" onclick="alert()"></i> |
+                    <i id="people_list_icon" class="fa fa-users" style="font-size:24px; cursor:pointer"></i> |
                     <i class="fa fa-gear" style="font-size:24px; cursor:pointer" onclick="alert()"></i>
                 </div>
             </div>
@@ -36,10 +36,13 @@
             </div>
         </div>
         <div class="col-3" id="chat_side_panel">
-            <div id="chat_screen_extra_panel_people" style="display: block">
+            <div id="chat_screen_extra_panel_people" style="display: none">
                 <h3>Members</h3>
+                <ul id="chat_screen_panel_memberlist">
+
+                </ul>
             </div>
-            <div id="chat_screen_extra_panel_settings" style="display: block">
+            <div id="chat_screen_extra_panel_settings" style="display: none">
                 <h3>Settings</h3>
             </div>
         </div>

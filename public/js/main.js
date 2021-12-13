@@ -5,6 +5,9 @@ let CHANNEL = null;
 //prevents needing to completely request all the messages, when a new message is posted
 let MESSAGES = null;
 
+//the last data recieved
+let LAST_DATA = null;
+
 
 $(document).ready(function(){
     //set a header so laravel won't get mad at you and throw a 419 to your face
@@ -38,7 +41,8 @@ $(document).ready(function(){
                 console.log('http request successfull');
                 console.log(data);
 
-                //as all messages are received, set them to MESSAGES
+                //as all messages are received, set them to MESSAGES, and the data itself to LAST_DATA
+                LAST_DATA = data;
                 MESSAGES = data.messages;
 
                 //show all the values (name, description etc.) of the channel
@@ -73,7 +77,29 @@ $(document).ready(function(){
 
         $("#text").val("");
     });
+
+    $("#people_list_icon").on("click", function(){
+        $("#chat_screen_extra_panel_people").css("display", "block");
+
+        console.log("last data: ");
+        console.log(LAST_DATA);
+
+        if(LAST_DATA == null){
+            return;
+        }
+
+        $("#chat_screen_panel_memberlist").empty();
+        for(var i = 0; i < LAST_DATA.users.length; i++){
+            var user = LAST_DATA.users[i];
+            $("#chat_screen_panel_memberlist").append("<li id='memberlist_user'>" + user.name + "</li>");
+        }
+
+    })
 });
+
+function reset_channel_values(){
+    //todo
+}
 
 function display_channel_values(channel){
     $("#channel_name").html(channel.name);

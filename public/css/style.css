@@ -93,3 +93,27 @@ body{
 .message_text{
     font-size: 17px;
 }
+
+/*memberlist*/
+
+#chat_screen_extra_panel_people{
+    padding:10px;
+    margin:20px;
+}
+
+#chat_screen_extra_panel_people h3{
+    margin-left:35px;
+}
+
+#chat_screen_panel_memberlist{
+    list-style-type: none;
+}
+
+#memberlist_user{
+    background-color: rgb(50, 151, 255);
+    padding:5px;
+    padding-left:10px;
+    width:200px;
+    margin:5px;
+}
+

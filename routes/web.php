@@ -18,14 +18,18 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', function(){
+    return redirect('/channels');
+});
 
+//api routes
 Route::prefix('/api/messages')->group(function(){
     Route::get('/channel/{channel}', [MessagesController::class, 'get']);
     Route::post('/', [MessagesController::class, 'store']);
     Route::delete('/{message}', [MessagesController::class, 'remove']);
 });
 
+//client routes
 Route::prefix('/channels')->group(function(){
     Route::get('/', [ChannelsController::class, 'index']);
 });

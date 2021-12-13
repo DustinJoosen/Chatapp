@@ -16,7 +16,7 @@ class MessagesController extends Controller
     //returns the channel accosiated with the id, including all messages
     public function get(Channel $channel){
         //include the user and channel inside the channel
-        $channel = $channel::with(['messages.channel', 'messages.user'])
+        $channel = $channel::with(['users', 'messages.channel', 'messages.user'])
             ->get()->find($channel->id);
 
         return response($channel, 200);

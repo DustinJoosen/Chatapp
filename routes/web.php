@@ -32,4 +32,7 @@ Route::prefix('/api/messages')->group(function(){
 //client routes
 Route::prefix('/channels')->group(function(){
     Route::get('/', [ChannelsController::class, 'index']);
+    Route::get('/create', [ChannelsController::class, 'create']);
+    Route::post('/store', [ChannelsController::class, 'store']);
+    Route::get('/join/channel:{channel}', [ChannelsController::class, 'join_via_link']);
 });

@@ -44,6 +44,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/channels">Channels</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/channels/create">Create new channel</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

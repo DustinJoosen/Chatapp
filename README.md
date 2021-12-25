@@ -12,10 +12,10 @@
     <li>Adding and removing people from your channels</li>
     <li>Admin need to be able to select a new admin</li>
     <li>Users need to be allowed to leave</li>
-    <li>Creating a new channel</li>
+    <li><del>Creating a new channel</del>(note: still needs styling)</li>
     <li>Add images to the channels(currently linked to a notfound.png image)</li>
     <li>Making the broadcasting a private channel instead of public</li>
     <li>Reset the screen when a new channel is selected</li>
     <li>Messages need to <b>visually</b> be sorted on date. Maybe like whatsapp did</li>
-    <li>Let a user join by using an invite link</li>
+    <li><del>Let a user join by using an invite link</del>del></li>
 </ul>

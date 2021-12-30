@@ -38,7 +38,7 @@ class ChannelsController extends Controller
             ["admin_id" => Auth::id()]
         );
 
-
+        //if an image is passed along, save it locally
         if(isset($data["image"])){
             //store the image and get the name
             $image_fp = $data["image"]->store('uploads', 'public') ?? "notfound.png";
@@ -59,6 +59,8 @@ class ChannelsController extends Controller
         return redirect('/channels');
     }
 
+    //lets users join a channel via a link
+    //example link: http://localhost:8000/channels/join/channel:1
     public function join_via_link(Channel $channel){
         $user = Auth::user();
         if($user == null || $channel == null){

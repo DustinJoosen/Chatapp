@@ -8,6 +8,9 @@ let MESSAGES = null;
 //the last data recieved
 let LAST_DATA = null;
 
+//the id of the currently logged in user
+let USER_ID = null;
+
 
 $(document).ready(function(){
     //set a header so laravel won't get mad at you and throw a 419 to your face
@@ -69,6 +72,7 @@ $(document).ready(function(){
             url: '/api/messages',
             data: $("#text, #channel_id").serialize(),
             success:function(store){
+                //message is send
             },
             error:function(e){
                 console.log(e.error);
@@ -93,7 +97,14 @@ $(document).ready(function(){
             var user = LAST_DATA.users[i];
             $("#chat_screen_panel_memberlist").append("<li id='memberlist_user'>" + user.name + "</li>");
         }
+    });
 
+    //starting on settings page
+    $("#settings_icon").on("click", function(){
+        if(CHANNEL == null){
+            alert('no channel selected');
+            return
+        }
     })
 });
 

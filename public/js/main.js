@@ -13,6 +13,9 @@ let USER_ID = null;
 
 
 $(document).ready(function(){
+    //set the user_id var to the logged in user
+    USER_ID = $("#user_id").val();
+
     //set a header so laravel won't get mad at you and throw a 419 to your face
     $.ajaxSetup({
         headers:{
@@ -83,6 +86,12 @@ $(document).ready(function(){
     });
 
     $("#people_list_icon").on("click", function(){
+        if(CHANNEL == null){
+            alert('no channel selected');
+            return
+        }
+
+        $("#chat_screen_extra_panel_settings").css("display", "none");
         $("#chat_screen_extra_panel_people").css("display", "block");
 
         console.log("last data: ");
@@ -95,8 +104,28 @@ $(document).ready(function(){
         $("#chat_screen_panel_memberlist").empty();
         for(var i = 0; i < LAST_DATA.users.length; i++){
             var user = LAST_DATA.users[i];
-            $("#chat_screen_panel_memberlist").append("<li id='memberlist_user'>" + user.name + "</li>");
+            var html;
+
+            if(is_admin(user.id)){
+                // html = "<li class='memberlist_item' onclick='remove_user("+user.id+")'>" + user.name +"<div class='admin_icon'><p>a</p></div></li>";
+                html = "<li class='memberlist_item' content='" + user.id +"'>" + user.name + "<div class='admin_icon'><p>a</p></div></li>"
+            }
+            else{
+                // html = "<li class='memberlist_item' onclick='remove_user("  + user.id + ")'>" + user.name + "</li>";
+                html = "<li class='memberlist_item' content='" + user.id +"'>" + user.name + "</li>"
+            }
+            $("#chat_screen_panel_memberlist").append(html);
         }
+
+        //make the 'leave' button
+        $("#chat_screen_panel_memberlist").append(
+            "<a class='memberlist_item memberlist_item_leave' href='/channels/leave/channel:" + CHANNEL + "'>Leave channel</a>"
+        );
+    });
+
+    //WHY THE FUCK IS THIS NOT TRIGGERING
+    $(".memberlist_item").on("click", function(){
+        alert('deleted');
     });
 
     //starting on settings page
@@ -105,8 +134,27 @@ $(document).ready(function(){
             alert('no channel selected');
             return
         }
-    })
+
+        $("#chat_screen_extra_panel_people").css("display", "none");
+        $("#chat_screen_extra_panel_settings").css("display", "block");
+
+    });
 });
+
+function remove_user(user_id){
+    //trying to send a http request, to remove the current user
+
+    $.ajax({
+        type: 'get',
+        url: '/channels/leave/channel:' + CHANNEL + '?user=' + user_id,
+        success :function(data){
+            alert('suc7!');
+        },
+        error:function(e){
+            console.log(e.error);
+        }
+    })
+}
 
 function reset_channel_values(){
     //todo
@@ -135,6 +183,20 @@ function display_messages(){
         var html = get_html(MESSAGES[i]);
         $("#messages_screen").prepend(html);
     }
+}
+
+//returns if you are an admin in the currently selected channel
+function is_admin(user_id=null){
+    if(LAST_DATA == null || LAST_DATA.admin_id == null){
+        return false;
+    }
+
+    //if there is nothing passed, set it to the currently logged in user
+    if(user_id == null){
+        user_id = USER_ID;
+    }
+
+    return LAST_DATA.admin_id == user_id;
 }
 
 //returns a proper bit of personalized html

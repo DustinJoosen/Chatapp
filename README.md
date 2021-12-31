@@ -11,7 +11,7 @@
     <li>Channel Settings need to be accessed, when you are an admin</li>
     <li>Adding and removing people from your channels</li>
     <li>Admin need to be able to select a new admin</li>
-    <li>Users need to be allowed to leave</li>
+    <li><del>Users need to be allowed to leave</del></li>
     <li><del>Creating a new channel(note: still needs styling)</del></li>
     <li><del>Add images to the channels</del></li>
     <li>Making the broadcasting a private channel instead of public</li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Channel;
+use App\Models\User;
 use Facade\FlareClient\Http\Exceptions\NotFound;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,10 +60,46 @@ class ChannelsController extends Controller
         return redirect('/channels');
     }
 
+    public function leave_channel(Request $request, Channel $channel){
+        $user = $request->has('user') ? User::findOrFail($request->input('user')) : Auth::user();
+
+        //if the user and channel are valid values
+        if($user == null || $channel == null){
+            return response("channel could not be found, or user is not authenticated", 404);
+        }
+        else{
+            //if the user is in a channel, leave it
+            if(($channel->users()->where('user_id', $user->id)->exists())){
+                $channel->users()->detach($user);
+            }
+
+            //if there are no more users in a channel, delete the channel
+            if($channel->users->count() <= 0){
+                $channel->delete();
+                return redirect('/channels');
+            }
+
+            //if the user is the admin of the channel, select a new admin
+            if($channel->admin->id == $user->id){
+                //get the first joined user
+                $users = $channel->users;
+                $first_user = $users[0];
+
+                //set the first user as the new admin
+                $channel->admin_id = $first_user->id;
+                $channel->push();
+            }
+
+        }
+
+        return redirect('/channels');
+    }
+
     //lets users join a channel via a link
     //example link: http://localhost:8000/channels/join/channel:1
-    public function join_via_link(Channel $channel){
-        $user = Auth::user();
+    public function join_via_link(Request $request, Channel $channel){
+        $user = $request->has('user') ? User::findOrFail($request->input('user')) : Auth::user();
+
         if($user == null || $channel == null){
             return response("channel or user is not found", 404);
         }

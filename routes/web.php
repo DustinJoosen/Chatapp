@@ -34,5 +34,6 @@ Route::prefix('/channels')->group(function(){
     Route::get('/', [ChannelsController::class, 'index']);
     Route::get('/create', [ChannelsController::class, 'create']);
     Route::post('/store', [ChannelsController::class, 'store']);
+    Route::get('/leave/channel:{channel}', [ChannelsController::class, 'leave_channel']);
     Route::get('/join/channel:{channel}', [ChannelsController::class, 'join_via_link']);
 });

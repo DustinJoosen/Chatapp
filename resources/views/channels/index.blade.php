@@ -36,6 +36,7 @@
             </div>
         </div>
         <div class="col-3" id="chat_side_panel">
+            <input type="hidden" name="user_id" id="user_id" value="{{ Auth::id() }}"/>
             <div id="chat_screen_extra_panel_people" style="display: none">
                 <h3>Members</h3>
                 <ul id="chat_screen_panel_memberlist">
@@ -44,6 +45,7 @@
             </div>
             <div id="chat_screen_extra_panel_settings" style="display: none">
                 <h3>Settings</h3>
+
             </div>
         </div>
 

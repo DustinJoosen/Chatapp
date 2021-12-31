@@ -109,11 +109,44 @@ body{
     list-style-type: none;
 }
 
-#memberlist_user{
+.memberlist_item{
     background-color: rgb(50, 151, 255);
+    color:white;
     padding:5px;
     padding-left:10px;
     width:200px;
     margin:5px;
 }
 
+.memberlist_item:hover{
+    text-decoration: line-through;
+    cursor: pointer;
+}
+
+.memberlist_item_leave{
+    position:absolute;
+    bottom: 30px;
+    background-color: tomato;
+    color:white;
+    text-decoration: none;
+}
+
+.memberlist_item_leave:hover{
+    color:white;
+    text-decoration: none;
+}
+
+.admin_icon{
+    width:15px;
+    height:15px;
+    border-radius: 50%;
+    background-color: lightgreen;
+    display:inline-block;
+    text-align: center;
+    font-size: 18px;
+    margin-left:5px;
+}
+
+.admin_icon p{
+    margin-top:-8px;
+}

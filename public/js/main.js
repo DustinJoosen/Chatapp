@@ -75,6 +75,7 @@ $(document).ready(function(){
             url: '/api/messages',
             data: $("#text, #channel_id").serialize(),
             success:function(store){
+                console.log("successfully send message: " + $("#text").val());
                 //message is send
             },
             error:function(e){
@@ -123,11 +124,6 @@ $(document).ready(function(){
         );
     });
 
-    //WHY THE FUCK IS THIS NOT TRIGGERING
-    $(".memberlist_item").on("click", function(){
-        alert('deleted');
-    });
-
     //starting on settings page
     $("#settings_icon").on("click", function(){
         if(CHANNEL == null){
@@ -139,6 +135,12 @@ $(document).ready(function(){
         $("#chat_screen_extra_panel_settings").css("display", "block");
 
     });
+
+    // //WHY THE FUCK IS THIS NOT TRIGGERING
+    // $(li).on("click", function(){
+    //     alert('*trigger clicked');
+    // });
+
 });
 
 function remove_user(user_id){

@@ -30,7 +30,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
     created(){
-        Echo.channel('notification')
+        //priority 1: private channel is not recieving input
+        Echo.private('notification')
             .listen('MessagePosted', (e) => {
                 //add the message to the list
                 add_message(e.message);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Channel;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -18,6 +19,6 @@ use Illuminate\Support\Facades\Broadcast;
 //});
 
 Broadcast::channel('notification', function(){
-    //add some logic of when users are allowed to listen
+//    return $user->channels()->where('id', $channel_id)->exists();
     return true;
 });
